@@ -1019,5 +1019,9 @@ Generado por WebIncidentResponse
     }
 }
 
-// Inicializar la aplicación
-const assistant = new IncidentResponseAssistant();
+// Inicializar la aplicación cuando el DOM esté listo
+let assistant;
+
+document.addEventListener('DOMContentLoaded', function() {
+    assistant = new IncidentResponseAssistant();
+});
