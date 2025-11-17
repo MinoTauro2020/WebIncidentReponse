@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebIncidentResponse - Sistema de Gestión de Incidentes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🛡️ WebIncidentResponse</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#incidents">Incidentes</a></li>
+                    <li><a href="#analytics">Análisis</a></li>
+                    <li><a href="#settings">Configuración</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="dashboard">
+            <h2>Panel de Control</h2>
+            <div class="stats-grid">
+                <div class="stat-card critical">
+                    <h3>Críticos</h3>
+                    <p class="stat-number" id="critical-count">0</p>
+                </div>
+                <div class="stat-card high">
+                    <h3>Altos</h3>
+                    <p class="stat-number" id="high-count">0</p>
+                </div>
+                <div class="stat-card medium">
+                    <h3>Medios</h3>
+                    <p class="stat-number" id="medium-count">0</p>
+                </div>
+                <div class="stat-card low">
+                    <h3>Bajos</h3>
+                    <p class="stat-number" id="low-count">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Incident Form Section -->
+        <section id="incidents" class="incident-form">
+            <h2>Registrar Nuevo Incidente</h2>
+            <form id="incidentForm">
+                <div class="form-group">
+                    <label for="incident-title">Título del Incidente</label>
+                    <input type="text" id="incident-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="incident-description">Descripción</label>
+                    <textarea id="incident-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="incident-severity">Severidad</label>
+                        <select id="incident-severity" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="critical">Crítico</option>
+                            <option value="high">Alto</option>
+                            <option value="medium">Medio</option>
+                            <option value="low">Bajo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="incident-type">Tipo</label>
+                        <select id="incident-type" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="malware">Malware</option>
+                            <option value="phishing">Phishing</option>
+                            <option value="breach">Brecha de Datos</option>
+                            <option value="ddos">DDoS</option>
+                            <option value="unauthorized">Acceso No Autorizado</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="incident-source">Fuente/IP</label>
+                    <input type="text" id="incident-source" placeholder="192.168.1.1">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Registrar Incidente</button>
+            </form>
+        </section>
+
+        <!-- Incidents List Section -->
+        <section class="incidents-list">
+            <h2>Incidentes Recientes</h2>
+            <div id="incidents-container">
+                <!-- Los incidentes se cargarán aquí dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WebIncidentResponse - Sistema de Gestión de Incidentes de Seguridad</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
