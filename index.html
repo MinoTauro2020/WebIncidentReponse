@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebIncidentResponse - Sistema de Gestión de Incidentes</title>
+    <title>WebIncidentResponse - Asistente de Respuesta a Incidentes</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,102 +12,149 @@
             <div class="container">
                 <div class="logo">
                     <h1>🛡️ WebIncidentResponse</h1>
+                    <p class="tagline">Asistente Inteligente de Respuesta a Incidentes</p>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="#dashboard">Dashboard</a></li>
-                    <li><a href="#incidents">Incidentes</a></li>
-                    <li><a href="#analytics">Análisis</a></li>
-                    <li><a href="#settings">Configuración</a></li>
-                </ul>
             </div>
         </nav>
     </header>
 
     <main class="container">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="dashboard">
-            <h2>Panel de Control</h2>
-            <div class="stats-grid">
-                <div class="stat-card critical">
-                    <h3>Críticos</h3>
-                    <p class="stat-number" id="critical-count">0</p>
+        <!-- Pantalla Inicial: Selección de Tipo de Incidente -->
+        <section id="incident-selector" class="incident-selector">
+            <h2>¿Qué tipo de incidente estás experimentando?</h2>
+            <p class="subtitle">Selecciona el tipo de incidente para iniciar el diagnóstico</p>
+
+            <div class="incident-types-grid">
+                <div class="incident-type-card" data-type="ransomware">
+                    <div class="icon">🔒</div>
+                    <h3>Ransomware</h3>
+                    <p>Archivos encriptados, nota de rescate, sistemas bloqueados</p>
                 </div>
-                <div class="stat-card high">
-                    <h3>Altos</h3>
-                    <p class="stat-number" id="high-count">0</p>
+
+                <div class="incident-type-card" data-type="phishing">
+                    <div class="icon">🎣</div>
+                    <h3>Phishing</h3>
+                    <p>Correos sospechosos, robo de credenciales, ingeniería social</p>
                 </div>
-                <div class="stat-card medium">
-                    <h3>Medios</h3>
-                    <p class="stat-number" id="medium-count">0</p>
+
+                <div class="incident-type-card" data-type="data-breach">
+                    <div class="icon">💾</div>
+                    <h3>Brecha de Datos</h3>
+                    <p>Filtración de información, acceso no autorizado a datos</p>
                 </div>
-                <div class="stat-card low">
-                    <h3>Bajos</h3>
-                    <p class="stat-number" id="low-count">0</p>
+
+                <div class="incident-type-card" data-type="malware">
+                    <div class="icon">🦠</div>
+                    <h3>Malware</h3>
+                    <p>Virus, troyanos, comportamiento anómalo del sistema</p>
+                </div>
+
+                <div class="incident-type-card" data-type="ddos">
+                    <div class="icon">⚡</div>
+                    <h3>DDoS</h3>
+                    <p>Denegación de servicio, servicios caídos, tráfico anómalo</p>
+                </div>
+
+                <div class="incident-type-card" data-type="unauthorized-access">
+                    <div class="icon">🚪</div>
+                    <h3>Acceso No Autorizado</h3>
+                    <p>Intrusión detectada, accesos sospechosos, cuentas comprometidas</p>
                 </div>
             </div>
         </section>
 
-        <!-- Incident Form Section -->
-        <section id="incidents" class="incident-form">
-            <h2>Registrar Nuevo Incidente</h2>
-            <form id="incidentForm">
-                <div class="form-group">
-                    <label for="incident-title">Título del Incidente</label>
-                    <input type="text" id="incident-title" required>
+        <!-- Pantalla de Diagnóstico -->
+        <section id="diagnostic-wizard" class="diagnostic-wizard hidden">
+            <div class="wizard-header">
+                <button id="back-button" class="btn-back">← Volver</button>
+                <h2 id="wizard-title">Diagnóstico de Incidente</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
+                <p class="progress-text"><span id="current-step">1</span> de <span id="total-steps">5</span></p>
+            </div>
 
-                <div class="form-group">
-                    <label for="incident-description">Descripción</label>
-                    <textarea id="incident-description" rows="4" required></textarea>
+            <div class="wizard-content">
+                <div id="question-container">
+                    <!-- Las preguntas se cargarán dinámicamente aquí -->
                 </div>
+            </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="incident-severity">Severidad</label>
-                        <select id="incident-severity" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="critical">Crítico</option>
-                            <option value="high">Alto</option>
-                            <option value="medium">Medio</option>
-                            <option value="low">Bajo</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="incident-type">Tipo</label>
-                        <select id="incident-type" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="malware">Malware</option>
-                            <option value="phishing">Phishing</option>
-                            <option value="breach">Brecha de Datos</option>
-                            <option value="ddos">DDoS</option>
-                            <option value="unauthorized">Acceso No Autorizado</option>
-                            <option value="other">Otro</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="incident-source">Fuente/IP</label>
-                    <input type="text" id="incident-source" placeholder="192.168.1.1">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Registrar Incidente</button>
-            </form>
+            <div class="wizard-actions">
+                <button id="prev-button" class="btn btn-secondary hidden">Anterior</button>
+                <button id="next-button" class="btn btn-primary">Siguiente</button>
+            </div>
         </section>
 
-        <!-- Incidents List Section -->
-        <section class="incidents-list">
-            <h2>Incidentes Recientes</h2>
-            <div id="incidents-container">
-                <!-- Los incidentes se cargarán aquí dinámicamente -->
+        <!-- Pantalla de Resultados -->
+        <section id="results-section" class="results-section hidden">
+            <div class="results-header">
+                <button id="restart-button" class="btn-back">← Nueva Consulta</button>
+                <h2>Diagnóstico y Plan de Acción</h2>
+            </div>
+
+            <div class="results-content">
+                <!-- Análisis de Situación -->
+                <div class="result-card severity-card">
+                    <h3>📊 Análisis de Situación</h3>
+                    <div id="situation-analysis"></div>
+                </div>
+
+                <!-- Nivel de Severidad -->
+                <div class="result-card">
+                    <h3>⚠️ Nivel de Severidad</h3>
+                    <div id="severity-level"></div>
+                </div>
+
+                <!-- Acciones Inmediatas -->
+                <div class="result-card">
+                    <h3>🚨 Acciones Inmediatas</h3>
+                    <div id="immediate-actions"></div>
+                </div>
+
+                <!-- Plan de Contención -->
+                <div class="result-card">
+                    <h3>🛡️ Plan de Contención</h3>
+                    <div id="containment-plan"></div>
+                </div>
+
+                <!-- Pasos de Recuperación -->
+                <div class="result-card">
+                    <h3>🔄 Pasos de Recuperación</h3>
+                    <div id="recovery-steps"></div>
+                </div>
+
+                <!-- Recomendaciones a Largo Plazo -->
+                <div class="result-card">
+                    <h3>📋 Recomendaciones a Largo Plazo</h3>
+                    <div id="long-term-recommendations"></div>
+                </div>
+
+                <!-- Recursos Adicionales -->
+                <div class="result-card">
+                    <h3>📚 Recursos Adicionales</h3>
+                    <div id="additional-resources"></div>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button id="download-report" class="btn btn-primary">📄 Descargar Reporte</button>
+                <button id="save-case" class="btn btn-secondary">💾 Guardar Caso</button>
+            </div>
+        </section>
+
+        <!-- Historial de Casos -->
+        <section id="case-history" class="case-history">
+            <h2>Historial de Casos</h2>
+            <div id="cases-container">
+                <!-- Los casos guardados se mostrarán aquí -->
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 WebIncidentResponse - Sistema de Gestión de Incidentes de Seguridad</p>
+            <p>&copy; 2025 WebIncidentResponse - Asistente Inteligente de Respuesta a Incidentes de Seguridad</p>
         </div>
     </footer>
 
